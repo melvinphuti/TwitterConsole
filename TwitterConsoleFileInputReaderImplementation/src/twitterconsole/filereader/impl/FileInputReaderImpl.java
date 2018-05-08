@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package twitterconsole;
+package twitterconsole.filereader.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,19 +18,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import twitterconsole.domain.Tweet;
 import twitterconsole.exception.StringValidationException;
-import twitterconsole.validation.StringValidationMessageEnum;
+import twitterconsole.exception.StringValidationMessageEnum;
+import twitterconsole.filereader.FileInputReader;
 import twitterconsole.validation.UserProfileValidator;
 
 /**
  *
  * @author User1
  */
-public class FileInputReader {
+public class FileInputReaderImpl implements FileInputReader{
     private static final String USER_FILE_LINE_INPUT_SEPARATOR = " follows ";
     private static final String USER_FOLLOWING_FILE_LINE_INPUT_SEPARATOR = ",";
     private static final String TWEET_FEED_FILE_LINE_INPUT_SEPARATOR = ">";
     
-    public static Map<String,Set<String> > readUserList(File inputFile) throws IOException{
+    @Override
+    public Map<String,Set<String> > readUserList(File inputFile) throws IOException{
         Map<String,Set<String> >  userList = new TreeMap<>();
         try (Scanner scanner = new Scanner(inputFile)) {
             while (scanner.hasNext()){
@@ -45,7 +47,8 @@ public class FileInputReader {
         return userList;
     }
 
-    public static List<Tweet> readTweetFeedList(File inputFile) throws IOException {
+    @Override
+    public List<Tweet> readTweetFeedList(File inputFile) throws IOException {
         List<Tweet> tweetFeedList = new ArrayList<>();
         try (Scanner scanner = new Scanner(inputFile)) {
             while (scanner.hasNext()){
@@ -84,7 +87,7 @@ public class FileInputReader {
             }            
         } catch (StringValidationException ex) {
             String warningMessage = "Invalid user input line: [" + userFileInputLine + "]";
-            Logger.getLogger(FileInputReader.class.getName()).log(Level.WARNING, warningMessage, ex);
+            Logger.getLogger(FileInputReaderImpl.class.getName()).log(Level.WARNING, warningMessage, ex);
         }
         return userList;
     }
@@ -110,13 +113,13 @@ public class FileInputReader {
             validateTweetFeedFileInputLine(tweetFeedFileInputLine);
             //no exception if valid
             String[] tweetFeedLine = tweetFeedFileInputLine.split(TWEET_FEED_FILE_LINE_INPUT_SEPARATOR);
-            //TODO: validate
-            String user = tweetFeedLine[0];//TODO: validate user existence
+            
+            String user = tweetFeedLine[0];//TODO: 
             String tweet = tweetFeedLine[1];//TODO: validate size
             tweetFeedList.add(new Tweet(user, tweet) );
         } catch (StringValidationException ex) {
             String warningMessage = "Invalid tweet feed input line: [" + tweetFeedFileInputLine + "]";
-            Logger.getLogger(FileInputReader.class.getName()).log(Level.WARNING, warningMessage, ex);
+            Logger.getLogger(FileInputReaderImpl.class.getName()).log(Level.WARNING, warningMessage, ex);
         }
         return tweetFeedList;
     }

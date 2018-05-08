@@ -5,8 +5,6 @@
  */
 package twitterconsole.exception;
 
-import twitterconsole.validation.StringValidationMessageEnum;
-
 /**
  *
  * @author User1

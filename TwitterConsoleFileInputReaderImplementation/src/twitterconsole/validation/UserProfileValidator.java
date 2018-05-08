@@ -6,6 +6,7 @@
 package twitterconsole.validation;
 
 import twitterconsole.exception.StringValidationException;
+import twitterconsole.exception.StringValidationMessageEnum;
 import twitterconsole.validation.common.StringValidator;
 
 /**
