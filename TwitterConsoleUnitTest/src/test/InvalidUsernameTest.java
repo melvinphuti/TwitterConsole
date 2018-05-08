@@ -13,13 +13,13 @@ import twitterconsole.domain.Tweet;
 import twitterconsole.factory.FileInputReaderFactory;
 import twitterconsole.filereader.FileInputReader;
 
-public class ReadUserListPositiveTest {
+public class InvalidUsernameTest {
 
 	@Test
 	public void test() {
 		try {
-	        String userInputfilePath = "testData/positiveTest/user.txt";
-	        String tweetFeedInputfilePath = "testData/positiveTest/tweet.txt";
+	        String userInputfilePath = "testData/invalidUsername/user.txt";
+	        String tweetFeedInputfilePath = "testData/invalidUsername/tweet.txt";
 			FileInputReader fileInputReader = FileInputReaderFactory.buildFileReader();
 			Map<String, Set<String>> userProfileTable = fileInputReader.readUserList(new File(userInputfilePath));
 			List<Tweet> tweetFeedList = fileInputReader.readTweetFeedList(new File(tweetFeedInputfilePath));

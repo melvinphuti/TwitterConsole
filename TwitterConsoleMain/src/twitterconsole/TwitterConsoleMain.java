@@ -5,8 +5,10 @@
  */
 package twitterconsole;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,9 +29,8 @@ public class TwitterConsoleMain {
      */
     public static void main(String[] args) {
     	
-    	
-        String userInputfilePath = "user.txt";
-        String tweetFeedInputfilePath = "tweet.txt";
+        String userInputfilePath = readInputFileNamePath("Enter the full file path of user input file(eg, 'c:\\user.txt'): ");
+        String tweetFeedInputfilePath = readInputFileNamePath("Enter the full file path of tweets input file(eg, 'c:\\tweet.txt'): ");
         Map<String,Set<String> > userProfileTable = null;
         List<Tweet> tweetFeedList = null;
         try {
@@ -74,6 +75,17 @@ public class TwitterConsoleMain {
             Logger.getLogger(TwitterConsoleMain.class.getName()).log(Level.SEVERE, errorMessage, e);
 		}
     }
-    
-    
+
+	private static String readInputFileNamePath(String userPrompt) {
+		String filePath = "";
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print(userPrompt);
+            filePath = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		return filePath;
+	}
 }

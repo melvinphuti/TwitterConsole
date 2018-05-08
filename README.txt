@@ -8,4 +8,8 @@ The solution consists of project folders
 	TwitterConsoleMain/  
 	TwitterConsoleUnitTest/. 
 
-The projects can be imported into the eclipse IDE and tested there.
+The projects can be imported into the eclipse IDE and tested there. Otherwise any other Java IDE, like Netbeans or IntelliJ, can be used.
+JUnit is the Java api that has been used for the unit tests in the test project "TwitterConsoleUnitTest/"(JUnit library is already included in this project)
+The following assumptions have been made:
+-invalid data will be ignored in the console output and logged to a log file
+-user will be prompted for file path input through the console
